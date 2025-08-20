@@ -1,0 +1,521 @@
+/* Palette dynamique et responsive */
+:root {
+    --primary: #4f8cff;
+    --secondary: #ff7eb3;
+    --accent: #43e97b;
+    --background: #f7fafd;
+    --background-dark: #181c24;
+    --text: #222;
+    --text-light: #f7fafd;
+    --card-bg: #fff;
+    --card-bg-dark: #232a34;
+    --shadow: 0 4px 24px rgba(79,140,255,0.10);
+}
+/* Ajoute un background général sur le body */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--background) url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    transition: background 0.4s, color 0.4s;
+    min-height: 100vh;
+}
+/* Ajoute un overlay pour améliorer la lisibilité */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(247,250,253,0.85);
+    z-index: 0;
+    pointer-events: none;
+}
+body.dark-mode::before {
+    background: rgba(24,28,36,0.90);
+}
+/* Place le contenu au-dessus de l'overlay */
+body > * {
+    position: relative;
+    z-index: 1;
+}
+/* Header avec une image de fond réseaux */
+header {
+    background: linear-gradient(120deg, var(--primary), var(--secondary), var(--accent)), 
+        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+    color: #fff;
+    padding: 3rem 1rem 2rem 1rem;
+    text-align: center;
+    position: relative;
+    border-radius: 0 0 2rem 2rem;
+    box-shadow: var(--shadow);
+    animation: headerFade 1.2s;
+    background-blend-mode: overlay;
+    padding: 2rem 1rem 1.5rem 1rem;
+    text-align: center;
+    border-radius: 0 0 2rem 2rem;
+    box-shadow: var(--shadow);
+    background-blend-mode: overlay;
+    width: 100%;
+    box-sizing: border-box;
+}
+@keyframes headerFade {
+    from { opacity: 0; transform: translateY(-40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+#theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    background: #fff;
+    color: var(--primary);
+    border: none;
+    border-radius: 30px;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.12);
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+#theme-toggle:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.07);
+}
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 2px 8px rgba(79,140,255,0.04);
+    border-radius: 0 0 1rem 1rem;
+}
+nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 1.2rem;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0;
+    min-width: max-content;
+}
+nav li {
+    flex: 0 0 auto;
+    min-width: 110px;
+    text-align: center;
+}
+nav a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    display: block;
+}
+nav a:hover, nav a.active {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(255,126,179,0.08);
+}
+/* Responsive container for sections */
+section {
+    max-width: 950px;
+    margin: 2.5rem auto;
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 2.5rem 2rem;
+    opacity: 1;
+    transition: box-shadow 0.3s, background 0.3s;
+    animation: fadeIn 1s;
+    width: 95%;
+    box-sizing: border-box;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+h1 {
+    margin: 0;
+}
+h2 {
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+}
+/* Section projets avec une image subtile */
+#projects {
+    background: var(--card-bg);
+    /* image supprimée */
+    /* background-size: 350px;
+    background-blend-mode: lighten; */
+}
+.project-list {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.project-card {
+    background: linear-gradient(120deg, #e0eaff 60%, #fff 100%);
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(79,140,255,0.10);
+    padding: 1.5rem 1.2rem;
+    width: 260px;
+    min-height: 180px;
+    transition: transform 0.25s, box-shadow 0.25s, background 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 80px; height: 80px;
+    background: var(--accent);
+    opacity: 0.08;
+    border-radius: 50%;
+    z-index: 0;
+}
+.project-card:hover {
+    transform: translateY(-12px) scale(1.045);
+    box-shadow: 0 8px 32px rgba(67,233,123,0.18);
+    background: linear-gradient(120deg, #d0f8ef 60%, #e0eaff 100%);
+}
+.project-card h3 {
+    margin-top: 0;
+    color: var(--secondary);
+    z-index: 1;
+    position: relative;
+}
+.project-card p {
+    z-index: 1;
+    position: relative;
+}
+ul {
+    padding-left: 1.5rem;
+}
+li {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+input, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+    background: #f7fafd;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+input:focus, textarea:focus {
+    border: 1.5px solid var(--primary);
+    box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+    outline: none;
+}
+button[type="submit"] {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 1.7rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+}
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    transform: scale(1.04);
+}
+#form-message {
+    color: var(--accent);
+    font-weight: bold;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+.hidden {
+    display: none;
+}
+footer {
+    text-align: center;
+    padding: 1.2rem 0;
+    font-size: 1rem;
+    background: var(--background);
+    color: var(--text);
+    margin-top: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Mode sombre : ajuster l'overlay et les backgrounds */
+body.dark-mode {
+    --background: var(--background-dark);
+    --text: var(--text-light);
+    --card-bg: var(--card-bg-dark);
+}
+body.dark-mode header {
+    background: linear-gradient(120deg, #232a34, var(--primary), var(--secondary)), 
+        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+    background-blend-mode: overlay;
+}
+body.dark-mode nav {
+    background: rgba(35,42,52,0.97);
+}
+body.dark-mode nav ul {
+    background: none;
+}
+body.dark-mode section {
+    background: var(--card-bg-dark);
+}
+body.dark-mode #projects {
+    background: var(--card-bg-dark);
+    /* image supprimée */
+    /* background-size: 350px;
+    background-blend-mode: lighten; */
+}
+body.dark-mode .project-card {
+    background: linear-gradient(120deg, #232a34 60%, #232a34 100%);
+    color: var(--text-light);
+}
+body.dark-mode .project-card:hover {
+    background: linear-gradient(120deg, #232a34 60%, #232a34 100%);
+}
+body.dark-mode footer {
+    background: linear-gradient(90deg, #232a34, #181c24 80%);
+    color: #aaa;
+}
+/* Ajout du mode sombre pour toutes les cartes et listes */
+body.dark-mode .exp-card,
+body.dark-mode .edu-card,
+body.dark-mode .form-card,
+body.dark-mode .proj-card {
+    background: linear-gradient(120deg, #232a34 60%, #232a34 100%);
+    color: var(--text-light);
+}
+
+body.dark-mode .exp-card:hover,
+body.dark-mode .edu-card:hover,
+body.dark-mode .form-card:hover,
+body.dark-mode .proj-card:hover {
+    background: linear-gradient(120deg, #232a34 60%, #232a34 100%);
+    box-shadow: 0 8px 32px rgba(67,233,123,0.10);
+}
+
+body.dark-mode ul,
+body.dark-mode li {
+    color: var(--text-light);
+}
+
+body.dark-mode input,
+body.dark-mode textarea {
+    background: #232a34;
+    color: var(--text-light);
+    border: 1px solid #444;
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus {
+    border: 1.5px solid var(--primary);
+    box-shadow: 0 2px 8px rgba(79,140,255,0.18);
+}
+
+body.dark-mode button[type="submit"] {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #fff;
+}
+
+body.dark-mode #form-message {
+    color: var(--accent);
+}
+
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: var(--secondary);
+}
+
+@media (max-width: 1100px) {
+    section { padding: 2rem 1rem; }
+    .project-list { gap: 1rem; }
+}
+@media (max-width: 900px) {
+    section {
+        max-width: 98vw;
+        padding: 1.5rem 0.7rem;
+    }
+    .exp-card, .edu-card, .form-card, .proj-card {
+        min-width: 180px;
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+    nav ul {
+        gap: 0.7rem;
+    }
+    nav li {
+        min-width: 90px;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 0.4rem 0.7rem;
+    }
+}
+@media (max-width: 800px) {
+    .project-list { flex-direction: column; align-items: center; }
+    section { padding: 1.2rem 0.5rem; }
+    header { padding: 2rem 0.5rem 1.2rem 0.5rem; }
+    nav ul { gap: 1.2rem; }
+}
+@media (max-width: 600px) {
+    header {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+    }
+    section {
+        padding: 1rem 0.3rem;
+    }
+    .exp-list, .edu-list, .form-list, .proj-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .exp-card, .edu-card, .form-card, .proj-card {
+        min-width: 140px;
+        max-width: 100vw;
+        padding: 0.7rem 0.3rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    nav li {
+        min-width: unset;
+    }
+    nav a {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.5rem;
+    }
+    form {
+        max-width: 98vw;
+        padding: 0;
+    }
+    footer {
+        font-size: 0.9rem;
+    }
+}
+/* Ajout pour les nouvelles sections */
+/* filepath: c:\Users\Mr AL\OneDrive\Documents\project\interactive-portfolio\src\css\styles.css */
+.exp-list, .edu-list, .form-list, .proj-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+.exp-card, .edu-card, .form-card, .proj-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1rem;
+    min-width: 220px;
+    max-width: 350px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+.exp-card:hover, .edu-card:hover, .form-card:hover, .proj-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(67,233,123,0.18);
+    background: linear-gradient(120deg, #d0f8ef 60%, #e0eaff 100%);
+}
+@media (max-width: 900px) {
+    .exp-list, .edu-list, .form-list, .proj-list {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Navigation scrollable horizontal sur petits écrans */
+.nav-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 1.2rem;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0;
+    min-width: max-content;
+}
+
+nav li {
+    flex: 0 0 auto;
+    min-width: 110px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    nav ul {
+        gap: 0.7rem;
+    }
+    nav li {
+        min-width: 90px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-scroll {
+        padding-bottom: 0.5rem;
+    }
+    nav ul {
+        gap: 0.3rem;
+    }
+    nav li {
+        min-width: 80px;
+    }
+}
+
+/* Navigation verticale scrollable pour très petits écrans */
+@media (max-width: 430px) {
+    .nav-scroll {
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 180px; /* Hauteur pour ~3 éléments */
+        width: 100%;
+        padding-bottom: 0;
+    }
+    nav ul {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0.2rem;
+        min-width: unset;
+        max-height: 180px;
+    }
+    nav li {
+        min-width: unset;
+        width: 100%;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 0.5rem 0.7rem;
+    }
+}
